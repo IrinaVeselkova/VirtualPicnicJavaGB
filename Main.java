@@ -16,14 +16,11 @@ public class Main {
                     + string.length()
                     + " cимволов");
         }
-        HashMap<String, Integer> countProduct = countProducts(picnic);
+
+        TreeMap<String, Integer> sort = new TreeMap<>(countProducts(picnic));
         System.out.println("\nВ корзине для пикника сейчас:");
-        for (String key : countProduct.keySet()) {
-            System.out.println(capitalized(key)
-                    + " - "
-                    + " ".repeat(maxLengthWords.getFirst().length() - key.length())+countProduct.get(key)
-                    + " шт.");
-        }
+        sortedTreeMapByValue(sort, maxLengthWords.getFirst().length());
+
     }
 
     public static ArrayList<String> maxLengthWord(ArrayList<String> picnic) {
@@ -38,8 +35,8 @@ public class Main {
         return maxLengthSizeWords;
     }
 
-    public static HashMap countProducts(ArrayList<String> picnic) {
-        HashMap countProduct = new HashMap<>();
+    public static HashMap<String, Integer> countProducts(ArrayList<String> picnic) {
+        HashMap<String, Integer> countProduct = new HashMap<>();
         for (String product : picnic) {
             if (!countProduct.containsKey(product.toLowerCase())) {
                 countProduct.put(product.toLowerCase(), 1);
@@ -48,10 +45,31 @@ public class Main {
                 countProduct.put(product.toLowerCase(), count);
             }
         }
-        return countProduct;}
+        return countProduct;
+    }
 
-    public static String capitalized(String string){
-        return string.substring(0,1).toUpperCase()+string.substring(1);
+    public static String capitalized(String string) {
+        return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
+
+    public static void sortedTreeMapByValue(TreeMap<String, Integer> treeMap, int maxLengthWords) {
+        TreeSet<Integer> values = new TreeSet<>(Comparator.reverseOrder());
+        values.addAll(treeMap.values());
+        Set<String> keySet = treeMap.keySet();
+        int count = 0;
+        for (Integer i : values) {
+            for (String key : keySet) {
+                if (Objects.equals(treeMap.get(key), i)) {
+                    System.out.println(capitalized(key)
+                            + " ".repeat(maxLengthWords - key.length())
+                            + " - " + i
+                            + " шт.");
+                    count += i;
+
+                }
+            }
+        }
+
     }
+}
 
