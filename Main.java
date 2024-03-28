@@ -56,7 +56,6 @@ public class Main {
         TreeSet<Integer> values = new TreeSet<>(Comparator.reverseOrder());
         values.addAll(treeMap.values());
         Set<String> keySet = treeMap.keySet();
-        int count = 0;
         for (Integer i : values) {
             for (String key : keySet) {
                 if (Objects.equals(treeMap.get(key), i)) {
@@ -64,8 +63,6 @@ public class Main {
                             + " ".repeat(maxLengthWords - key.length())
                             + " - " + i
                             + " шт.");
-                    count += i;
-
                 }
             }
         }
