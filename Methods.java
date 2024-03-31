@@ -1,6 +1,19 @@
 import java.util.*;
 
 public class Methods {
+
+    public static String getFilename() {
+        return "input.txt";
+    }
+
+
+    public static String printSting(String string) {
+        return capitalized(string)
+                + " - "
+                + string.length()
+                + " cимволов";
+    }
+
     public static ArrayList<String> maxLengthWord(ArrayList<String> picnic) {
         picnic.sort(Comparator.comparingInt(String::length));
         ArrayList<String> maxLengthSizeWords = new ArrayList<>();
@@ -31,7 +44,7 @@ public class Methods {
     }
 
     public static void sortedTreeMapByValue(TreeMap<String, Integer> treeMap, int maxLengthWords) {
-        TreeSet<Integer> values = new TreeSet<>(Comparator.reverseOrder());
+        Set<Integer> values = new TreeSet<>(Comparator.reverseOrder());
         values.addAll(treeMap.values());
         Set<String> keySet = treeMap.keySet();
         for (Integer i : values) {
